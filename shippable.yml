@@ -10,9 +10,12 @@ services:
 env:
   global:
     - DISPLAY=:99.0
+    - TEST=1
 
 install:
   - pip install -r requirements.txt
+  - export TEST=2
+  - export AAA=2
 
 before_script: 
   - mkdir -p shippable/testresults
@@ -21,6 +24,8 @@ before_script:
   - /etc/init.d/xvfb start 
 
 script:
+  - echo $TEST
+  - echo $AAA
   - python manage.py test
 
 after_script:
